@@ -1,7 +1,5 @@
 # node-hapi-react
 
-Sample application using node.js for back-end and react.js for frontend.
-
 Following packages are used in node.js part:
 1) hapi : server framework 
 2) hapi-auth-jwt2: jwt authentication
