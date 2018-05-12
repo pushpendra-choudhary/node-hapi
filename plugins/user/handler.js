@@ -4,23 +4,31 @@ let https = require("https");
 const User = require('../../models/user');
 // let requestLib = require("request");
 
-funcs.getUsers = (request, h) => {
+funcs.getUsers = async (request, h) => {
 
     return getUsersData().then(data => {
-        return h.response({
+         return h.response({
             data: data
         })
     })
 };
 
-funcs.setUser = (request, h) => {
+funcs.setUser = async (request, h) => {
 
-    let data = setUserData()
-
-    console.log(data)
-
-    return h.response(data)
+    return setUserData().then(data => {
+         return h.response({
+            data:data
+        })
+    })
  };
+
+ funcs.deleteUsers = (request, h) => {
+    return deleteAllusers().then(data => {
+        return h.response({
+           data:data
+       })
+   })
+ }
 
 
  function getUsersData(){
@@ -35,57 +43,60 @@ funcs.setUser = (request, h) => {
                     error: error
                 })
             }
-            console.error(users);
-
             resolve({
-                status: false,
+                status: true,
                 users: users
             })
         });
     })
-
-    // return new Promise((resolve, reject) => {
-
-    //     User.find(function(error, users) {
-    //         if (error) {
-    //             console.error(error);
-    //             resolve({
-    //                 status: false,
-    //                 error: error
-    //             })
-    //         }
-    //         console.error(users);
-
-    //         resolve({
-    //             status: false,
-    //             users: users
-    //         })
-    //     });
-        
-    // })
 }
 
 
 function setUserData() {
-    const user = new User({
-        first_name: "John",
-        last_name: "roy",
-        designation: "programmer",
-        employee_id: "123"
-    });
-    user.save(function(error, user) {
-      if (error) {
-          console.error(error);
-          return error
-      }
 
-      console.error(user);
+    return new Promise((resolve, reject) => {
+        const user = new User({
+            first_name: "John",
+            last_name: "roy",
+            designation: "programmer",
+            employee_id: "123"
+        });
+        user.save(function(error, user) {
+        if (error) {
+            console.error(error);
+            
+            resolve({
+                status: false,
+                error: error
+            })
+        }
 
-      return user
-    //     status: true,
-    //     id: user.id
-    // }
-    });
+        resolve({
+            status:true,
+            user: user
+        })
+
+    })
+  })
+}
+
+function deleteAllusers() {
+    return new Promise(resolve => {
+      
+        User.collection.drop(function(error, result) {
+            if (error) {
+                console.error(error);
+                resolve({
+                    status: false,
+                    error: error
+                })
+            }
+            resolve({
+                status: true,
+                message: result
+            })
+        });
+    })
 }
 
 

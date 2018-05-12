@@ -4,10 +4,25 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const db = require('./configs/db');
 
+// routes:{cors:true}
 const server = Hapi.server({
     port: 3000,
     host: 'localhost',
-    routes:{cors:true}
+    routes: {
+        validate: {
+          failAction: async (request, h, err) => {
+            if (process.env.NODE_ENV === 'production') {
+              // In prod, log a limited error message and throw the default Bad Request error.
+              console.error('ValidationError:', err.message); // Better to use an actual logger here.
+              throw Boom.badRequest(`Invalid request payload input`);
+            } else {
+              // During development, log and respond with the full error.
+              console.error(err);
+              throw err;
+            }
+          }
+        }
+      }
 });
 
 // server.route({
@@ -33,8 +48,9 @@ const server = Hapi.server({
 // });
 
 const init = async () => {
+    
 
-    await server.register(require('./plugins/user'))
+    // await server.register(require('./plugins/user'))
 
     await server.register([Inert,
         {
@@ -44,6 +60,11 @@ const init = async () => {
                 logEvents: ['response']
             }
         },
+
+        require('hapi-auth-jwt2'),
+        require('./plugins/auth'),
+        require('./plugins/signup'),
+        require('./plugins/user')
     ])
   
     

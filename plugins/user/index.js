@@ -17,7 +17,7 @@ module.exports = {
 		{
 		  method: "GET",
 		  path: "/api/users",
-		  config:{
+		  options:{
 			auth:false,
 			tags: ['api'],
 			validate:{}
@@ -27,52 +27,24 @@ module.exports = {
 		{
 			method: 'POST',
 		    path: '/api/user',
-		    config:{
+		    options:{
 		    	auth:false,
 		    	tags: ['api'],
 		    	validate:{}
 		    },
 		    handler: controller.setUser
+		},
+		{
+			method: 'DELETE',
+		    path: '/api/users',
+		    options:{
+		    	auth:false,
+		    	tags: ['api'],
+		    	validate:{}
+		    },
+		    handler: controller.deleteUsers
 		}
 	  ]);
 	
 	}
-  }
-
-// exports.register = function (server, options, next) {
-	
-// 	server.route([
-// 		{
-// 			method: 'GET',
-// 		    path: '/api/users',
-// 		    config:{
-// 		    	auth:false,
-// 		    	tags: ['api'],
-// 		    	validate:{}
-// 		    },
-// 		    handler: controller.getUsers
-// 		},
-// 		{
-// 			method: 'POST',
-// 		    path: '/user',
-// 		    config:{
-// 		    	auth:false,
-// 		    	tags: ['api'],
-// 		    	validate:{}
-// 		    },
-// 		    handler: controller.setUser
-// 		}
-// 	]);
-
-//     next();
-// };
-
-// exports.register.attributes = {
-//     pkg:{"name": "user",
-//         "version": "0.0.1",
-//         "description": "example locate me feature for micro app",
-//         "main": "index.js"
-//        }
-// };
-
-
+}
