@@ -43,6 +43,9 @@ funcs.setUser = async (request, h) => {
                     error: error
                 })
             }
+
+            console.log(users);
+
             resolve({
                 status: true,
                 users: users

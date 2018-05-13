@@ -14,26 +14,19 @@ module.exports = {
 
 	register: async (server, options) => {
 
-      //  server.register(jwt, registerAuth);
-
-
-
-        // function registerAuth (err) {
-        //     if (err) { return }
-
         server.auth.strategy('jwt', 'jwt',
         { key: 'SamplePassword',          // Never Share your secret key
           validate: controller.validate,            // validate function defined above
           verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
         });
         
-            // server.auth.strategy('jwt', 'jwt', {
-            //   key: process.env.JWT || 'SamplePassword',
-            //   validateFunc: controller.validate,
-            //   verifyOptions: {algorithms: [ 'HS256' ]}
-            // });
-        
-            server.auth.default('jwt');
-        //   }
-	}
+        server.auth.default('jwt');
+  }
+  
 }
+
+// bring your own validation function
+const validate = async function (decoded, request) {
+
+  return { isValid: true };
+};

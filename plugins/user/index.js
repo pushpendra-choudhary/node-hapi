@@ -18,7 +18,7 @@ module.exports = {
 		  method: "GET",
 		  path: "/api/users",
 		  options:{
-			auth:false,
+			auth:'jwt',
 			tags: ['api'],
 			validate:{}
 		},

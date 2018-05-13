@@ -5,6 +5,7 @@ let funcs = {};
 const jwt = require('hapi-auth-jwt2');
 const User = require('../../models/user');
 
+
 funcs.validate = async function (decoded, request) {
 
     
@@ -16,13 +17,18 @@ funcs.validate = async function (decoded, request) {
             return { isValid: false };
         }
     })
+
+    // console.log("data", data);
+
+    // return { isValid: true };
+    
 }
 
 function findUser(id){
 
     return new Promise(resolve => {
-      
-        User.findbyId(id, function(error, user) {
+
+        User.findOne({ _id: id }, function(error, user) {
             if (error) {
                 console.error(error);
                 resolve({
@@ -30,6 +36,9 @@ function findUser(id){
                     error: error
                 })
             }
+
+            console.log("auth_data", user);
+
             resolve({
                 status: true,
                 users: user.id
