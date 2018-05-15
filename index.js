@@ -25,6 +25,7 @@ const server = Hapi.server({
       }
 });
 
+
 // server.route({
 //     method: 'GET',
 //     path: '/',
