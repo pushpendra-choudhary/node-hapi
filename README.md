@@ -1,6 +1,8 @@
-# node-hapi-react
+# node-hapi
 
-Following packages are used in node.js part:
+Hapi is a plugin based framework for node.js applications. This is a demo example which uses sophisticated authentication using jwt(jsonwebtoken). 
+
+Following packages are used till now:
 1) hapi : server framework 
 2) hapi-auth-jwt2: jwt authentication
 3) jsonwebtoken: jwt creation
