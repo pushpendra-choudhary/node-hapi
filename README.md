@@ -16,7 +16,7 @@ Flow:
 APIs which are developed till now.
 1) /api/signup (Here you have to provide name, email and password it responds with jwt token else through an error for missing fields)
 2) /api/signin (provide email and password it will look into the database if user exists it will respond with jwt token)
-3) /api/users  (list all the users, it requires jwt token in headers else throw a authorization error)
+3) /api/users  (list all the users, it requires jwt token in headers else throw an authorization error)
 
 
 ### How to run?
@@ -25,10 +25,10 @@ https://docs.mongodb.com/manual/installation/
 
 
 Once your mongo server up and run do following: 
-git clone https://github.com/pushpendra-spartan/node-hapi.git
-cd node-hapi
-npm install
-node index.js
+git clone https://github.com/pushpendra-spartan/node-hapi.git </br>
+cd node-hapi  </br>
+npm install    </br>
+node index.js  </br>
 
 that's it your node server is on localhost now. You can test all the APIs from postman. 
 
